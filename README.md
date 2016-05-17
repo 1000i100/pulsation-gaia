@@ -15,16 +15,22 @@ Pulsation Gaïa est un univers de jeu de rôle post apocalyptique ou la nature a
 
 ## Spécificité Australienne
 Vous connaissez le dicton : "En australie, la nature veut votre peau !" ?
+
 Ici, c'est a prendre au pied de la lettre, et c'est la raison pour la quelle en Australie, la civilisation s'est à peu près maintenue tel que nous la connaissons actuellement. Enfin, pas tout à fait quand même. Le mode de vie occidental y est en déclin, mais perdure encore. Au contraire, la culture et les modes de vie arborigène prennent leur essort, panaché avec des initiative écologique diverses qui constituait des mouvements contestataires de l'ancienne culutre occidentale.
+
 Les conaissances scientifique ce sont maintenues, mais l'usage de très nombreuses technologies à reculé, par nécessité de survie : les réactions de l'environnement naturel s'avère assez dissuasives de toute polution ou surexploitation.
+
 Les énergie fossiles existe toujours, mais sont devenues des énergie de secours, utilisé avec parcimonie.
 
 ## Scénario suggéré
 L'option qui permettrait une survie dans de bonnes conditions de toute la population actuelle d'Australie serait d'en envoyer au moins 50% sur les autres continents, d'ici 5 ans maximum. Du coup, il faut étudier la faisabilité de la chose. Pour la première fois depuis presque 20 ans, un avion va prendre son envole pour effectuer un vole de reconnaissance au dessus de l'Asie avant de revenir par l'Afrique.
+
 Vous faite partie de l'expédition (a vous de trouver une raison valable pour qu'on vous fasse monter à bord).
+
 L'équipage de l'avion devra être constitué à minima d'un pilote et copilote, de quelques techniciens aéronautique, de personnel scientifique (botaniste, ornitologue, géologue...), d'hommes de terrains (garde forestier, militaire, trappeurs, migrant tardif... bref des personnes habitués à la survie en environnement naturel inhospitalier).
+
 30 personnes seronts à bord, et le départ est prévu dans une semaine. Vous pouvez demander à ce que soit embarqué certains équipements, dans la limite du raisonnable. La partie commence au décolage de l'avion.
 
 ## Inspiration
-Vermine (univers)
-Humanidyne (système de jeu)
+- Vermine (univers)
+- Humanidyne (système de jeu)
