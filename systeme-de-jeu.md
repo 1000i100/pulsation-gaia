@@ -55,6 +55,7 @@ En plus de ces deux caractéristiques, chaque personnage à un domaine principal
 
 - Le domaine principal apporte un bonus de +2 sur sa dicipline et sujets connexes, et rayonne à +1 sur les domaines en rapports.
 - Les domaines secondaires apporte un bonus de +1 et ne rayonnes à +1 que sur les sujets vraiements connexes.
+
 Exemple :
 - Un pro de l'escalade (domaine principal) bénéficiera d'un +2 aussi bien pour grimper, que pour faire des noeuds, estimer la soliditer d'une corde ou d'une paroie, connaitre les secrets de la montagnes... et d'un +1 sur tout ce qui est solicité par l'escalade (force, endurance, agilité de mouvement, équilibre... les sens dans certains contextes...)
 - Un amateur d'escalade (domaine secondaire) bénéficiera d'un +1 pour grimper, faire des noeuds, estimer la soliditer d'une corde ou d'une paroie, et pour garder son équilibre, bien se rattraper...
