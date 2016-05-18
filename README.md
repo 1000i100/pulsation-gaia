@@ -33,4 +33,4 @@ L'équipage de l'avion devra être constitué à minima d'un pilote et copilote,
 
 ## Inspiration
 - Vermine (univers)
-- Humanidyne (système de jeu)
+- Humanidyne ([système de jeu](https://github.com/GammaNu/pulsation-gaia/blob/master/systeme-de-jeu.md))
