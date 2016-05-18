@@ -62,3 +62,44 @@ Exemple :
 - Un guide de montagne professionnel, amateur d'escalade et de parapente pourrais cumuler ses bonus pour atteindre +4 en connaissances de la montagne et en endurance à l'effort physique, rayonnerais jusqu'a +2 avec un corp athlétique sur tout ce qui à trait à son méthabolisme, donc y compris pour de l'endurance face à des maladies...
 
 Le rayonnement des domaines principaux et secondaires sont à la discression du MJ, de même, que l'attribution ou non de point d'experiences pour ajouter ou améliorer des domaines.
+
+## Combats
+Les étapes type :
+1. L'initiative. Elle est entièrement à la discression du MJ (contexte et espèces en présences)
+2. Touché ? attaque - esquive en opposition + ou - contexte (distance, taille, surprise...)
+3. Parade et localisation : Détaillées ci dessous.
+4. Dégats ? Degré de réussite au touché + dégats de l'arme (fixe) - resistance cible (fixe, mais dépendant de la localisation)
+
+**Note :** *une esquive ou une parade raté donnera autant de bonus à l'adversaire au combat (pour toucher, cibler, ou faire mal).*
+
+### Parade et localisation
+**Parade passive (armure hétérogène)**
+Dès que le contexte le permet, si le défenseur dispose d'une armure hétérogène (carapace rossale, armure sans casque...), on considère qu'il présente spontanément la partie la mieux protégé. 
+- Sans ciblage adverse, c'est la résistance maximum qui s'applique sauf sur 3 succès à la localisation.
+- La parade passive est contré par le ciblage spécifique adverse.
+
+**Parade active (bouclier ou action dédiée)**
+Quand le contexte le permet vous pouvez choisir d'effectuer une parade active qui remplacera une action offensive (sauf réussite remarcable permettant une contre-attaque).
+- Le degré de réussite (ou d'échec) est soustrait au nombre de réussite sans ciblage ou à la marge de réussite avec ciblage spécifique.
+- A partir de 1 succès restant après annulation de tout les succès de ciblage adverse, vous gagnez une contre attaque.
+- Si en échouant votre parade vous donnez suffisement de succès à l'adversaire pour qu'il sorte des échelles indiqué, c'est lui qui aura une attaque suplémentaire, avec vos degré d'échec suplémentaire en bonus pour lui.
+
+
+**Sans ciblage spécifique :**
+L'attaquant lance 3 D2.
+- 3 réussites : tête (ou zone létal/sensible selon l'espèce)
+- 2 réussites : tronc (ou dans la masse, qui contient des organes vitaux, qui fait le lien entre les membres, mais qui encaisse plutôt bien en général)
+- 1 réussite : un membre auxilière déterminé comme suit par des jets de dés suplémentaire. Par exemple pour un humanoïde + 1 D2 -> réussite jambe échec bras. +1 second D2 -> réussite : gauche, échec droit.
+- 0 réussite : comme pour 1 réussite, mais avec -1 au dégats.
+
+**Avec ciblage spécifique :**
+La difficulté pour simplement toucher est augmentée de 1, et la précision du ciblage dépend du degré de réussite au touché.
+- Réussir de 0 correspond à une localisation classique à 0.
+- Réussir de 1 permet un ciblage grossier (éviter les zones renforcées de la carapaces, toucher a ventre...)
+- Réussir de 2 permet de toucher une partie moins accessible (la jambe qui n'est pas de votre coté, la tête ou le cou.
+- Réussir de 3 permet de toucher précisément dans un interstice, ou un organe de surface (oeils, parties géntiales...)
+- Dès 3 succès de marge, les succès suplémentaire s'ajoutent au dégats, comme c'est le cas dès le premier succès de marge sans ciblage spécifique.
+- Dès 4 succès de marge, l'armure ou résistance adverse est divisé par 2
+- A 5 succès de marge et plus vous avez trouvé moyen de toucher ce que vous vouliez, y compris s'il s'agit d'un organe interne spécifique (sauf si le MJ en décide autrement)
+
+
