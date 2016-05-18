@@ -1,9 +1,11 @@
 ## Principe
 Lors d'un jet de dé, vous pouvez utiliser n'importe quoi qui ai 50 % de chance de réussite et autant d'échec. (pair impair sur des dés, pile ou face sur des pièces, tirage aléatoire de carte...)
 
-Vous lancez autant de dé que vous voulez, et vos compétences annules autant d'échec que vous avez de point dans le domaine.
+**Lancez autant de dé que vous voulez. Vos compétences annulent autant d'échec que de point dans la compétence, puis chaque couple réussite/échec s'annule.**
 
-(Lancer moins ou autant de dés que la compétence liée est prudent, lancer le double de dé que votre compétence est statistiquement optimal, lancer plus est risqué, mais peux être nécessaire pour réussir des actions ardues.)
+- Lancer autant de dés que votre compétence, vous ne prennez aucun risque, mais vous ne ferez rien d'extraordinaire.
+- Lancer le double de dés que vos points de compétence est statistiquement optimal.
+- Lancer plus du double est risqué, mais peux être nécessaire pour réussir des actions d'éclat, ou particulièrement difficile.
 
 Les actions peuvent avoir, a la discression du MJ, une difficulté intrinscèque, une difficulté contextuelle, ou se faire en opposition au résultat d'une autre action.
 
@@ -40,5 +42,22 @@ Les actions peuvent avoir, a la discression du MJ, une difficulté intrinscèque
 - -15-19 : Si ça peut vous tuer tous, c'est fait aussi.
 - -20... : Vous connaissez l'effet papillon ? Lancer trop de dé pour enfiler ses chaussettes, c'est dangereux. Le frotement improbable entre les fibre du tissu à créé un troup noir qui à aspiré l'univers tout entier.
 
+## Fiche personnage
+Chaque personnage à 2 caractéristiques principales :
+- **physique** : inclue les traditionnelles forces, endurances, agilité... l'aquité sensorielle, la réactivité cérébralle...
+- **connaissances** : base généraliste de connaissances, toutes disciplines confondues. De l'astrophisique à la cuisine, en passant par la génétique ou l'art de faire passer de baratiner les gens.
 
+Un être humain a normalement 3 point répartis entre physique et connaissances. les jeunes on généralement plus en physique qu'en connaissance, et la tendance s'inverse avec l'age.
 
+Le MJ peu décider d'attriber a ses joueurs 3, 4, voir 5 points à répartir dans ces caractéristique selon s'il souhaite faire jouer des personnage normaux, ou spécialement avantagésparticulièrement extraordinaire.
+
+En plus de ces deux caractéristiques, chaque personnage à un domaine principal et deux domaines secondaires. Généralement un métier et deux hobbies, mais il peut en être autrement.
+
+- Le domaine principal apporte un bonus de +2 sur sa dicipline et sujets connexes, et rayonne à +1 sur les domaines en rapports.
+- Les domaines secondaires apporte un bonus de +1 et ne rayonnes à +1 que sur les sujets vraiements connexes.
+Exemple :
+- Un pro de l'escalade (domaine principal) bénéficiera d'un +2 aussi bien pour grimper, que pour faire des noeuds, estimer la soliditer d'une corde ou d'une paroie, connaitre les secrets de la montagnes... et d'un +1 sur tout ce qui est solicité par l'escalade (force, endurance, agilité de mouvement, équilibre... les sens dans certains contextes...)
+- Un amateur d'escalade (domaine secondaire) bénéficiera d'un +1 pour grimper, faire des noeuds, estimer la soliditer d'une corde ou d'une paroie, et pour garder son équilibre, bien se rattraper...
+- Un guide de montagne professionnel, amateur d'escalade et de parapente pourrais cumuler ses bonus pour atteindre +4 en connaissances de la montagne et en endurance à l'effort physique, rayonnerais jusqu'a +2 avec un corp athlétique sur tout ce qui à trait à son méthabolisme, donc y compris pour de l'endurance face à des maladies...
+
+Le rayonnement des domaines principaux et secondaires sont à la discression du MJ, de même, que l'attribution ou non de point d'experiences pour ajouter ou améliorer des domaines.
