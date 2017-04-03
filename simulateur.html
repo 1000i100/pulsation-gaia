@@ -1,0 +1,182 @@
+<meta charset="utf-8">
+
+comp: <input id="comp" placeholder="comp. (echecs annulés)"/>
+dés: <input id="d" placeholder="nombre de dé lancé"/>
+seuils: <input id="seuils" placeholder="seuils de réussite ( 2, 5 pour indiquer 2 seuils différents)"/>
+lancés: <input id="nbrThrow" placeholder="précision (nombre de lancé pour la simulation)" value="10000"/>
+<button id="sim" onclick="simLaunch()">Lancer une simulation</button>
+
+
+<div id="resultArea"></div>
+<script>
+function simLaunch(){
+	const cfg = getFormData();
+	const res = throwDices(cfg.d, cfg.comp, cfg.nbrThrow);
+	formatResults(res,cfg.seuils);
+}
+function getFormData(){
+	let seuils = document.getElementById("seuils").value.split(",").map((v)=>parseInt(v));
+	seuils.push(0);
+	seuils = Array.from(new Set(seuils));
+	seuils.sort( (a,b) => a-b );
+	return {
+		comp: parseInt(document.getElementById("comp").value),
+		d: parseInt(document.getElementById("d").value),
+		"seuils": seuils,
+		nbrThrow: parseInt(document.getElementById("nbrThrow").value)
+	};
+}
+function throwDices(dicesPerThrow, failsCancelled, throwTimes){
+	let results = {};
+	for(let i=0;i<throwTimes;i++) {
+		const res = throwDicesOnce(dicesPerThrow, failsCancelled);
+		if(!results[res]) results[res] = 0;
+		results[res]++;
+	}
+	return results;
+}
+function throwDicesOnce(dicesPerThrow, failsCancelled){
+	let fails = 0;
+	let success = 0;
+	for(let i=0;i<dicesPerThrow;i++) Math.floor(2*Math.random())?success++:fails++;
+	fails = Math.max(0, fails-failsCancelled);
+	return success - fails;
+}
+function formatResults(results, steps){
+	let cols = Object.keys(results).sort( (a,b) => a-b );
+	linearCols = [];
+	for(let i=cols[0];i<cols[cols.length-1];i++) linearCols.push(i);
+	
+	let maxMulti = 5;
+	
+	let html = "<table><thead><tr><th></th><th>" + linearCols.join("</th><th>") +"</th></tr></thead><tbody>";
+	const total = Object.values(results).reduce((accu, v) => accu+v, 0);
+
+	html += "<tr><th class=right>résultats bruts :</th>";
+	for(let i of linearCols){
+		html+="<td>"+(results[i]?results[i]:results[i]=0)+"</td>";
+	}
+	multiColTotalSpan = 0;
+	for(let essais = 2; essais<=maxMulti;essais++){
+		for(let reussites=0;reussites<=essais;reussites++) multiColTotalSpan++;
+		multiColTotalSpan++
+	}
+	html += '<th>&nbsp;</th><th colspan="'+multiColTotalSpan+'">réussites sur plusieurs lancés</th></tr>';
+
+	html += "<tr><th class=right>pourcentages :</th>";
+	for(let i of linearCols){
+		let res = '';
+		if(results[i]) res = Math.round(100*results[i]/total)/1 +"<span>%</span>";
+		html+="<td>"+res+"</td>";
+	}
+	html += "<th>&nbsp;</th>";
+	for(let essais = 2; essais<=maxMulti;essais++)
+		html += '<th colspan="'+(essais+1)+'">'+essais+' lancés</th><th>&nbsp;</th>'
+	html += "</tr>";
+
+	html += "<tr><th class=right>par seuils :</th>";
+	let accu = 0;
+	let colspan = 0;
+	let iStep = 0;
+	let step = steps[iStep];
+	for(let i of linearCols){
+		if(i === step){
+			html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
+			colspan=0;
+			accu=0;
+			iStep++;
+			step = steps[iStep];
+		}
+		accu+=results[i];
+		colspan++;
+	}
+	html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
+	html += "<th>&nbsp;</th>";
+	for(let essais = 2; essais<=maxMulti;essais++){
+		for(let reussites=0;reussites<=essais;reussites++)
+			html += '<th  title="'+reussites+'/'+essais+' au moins">'+reussites+'/'+essais+'</th>'
+		html += "<th>&nbsp;</th>";
+	}
+	html += "</tr>";
+
+	for(step of steps){
+		html += "<tr><th class=right>"+step+" et plus :</th>";
+		let accu = 0;
+		let colspan = 0;
+		for(let i of linearCols){
+			if(i === step){
+				html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
+				colspan=0;
+				accu=0;
+			}
+			accu+=results[i];
+			colspan++;
+		}
+		html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
+		html += "<th>&nbsp;</th>";
+		const proba = accu/total;
+		for(let essais = 2; essais<=maxMulti;essais++){
+			for(let reussites=0;reussites<=essais;reussites++){
+				let res = probaNbrReussitesMultiEssais(proba,reussites,essais);
+				let auMoins = 0;
+				for(let plusDeReussites=reussites;plusDeReussites<=essais;plusDeReussites++)
+					auMoins += probaNbrReussitesMultiEssais(proba,plusDeReussites,essais);
+				html += '<td title="'+Math.round(100*auMoins)/1+'%">'+Math.round(100*res)/1+'<span>%</span></th>'
+			}
+			html += "<th>&nbsp;</th>";
+		}
+		html += "</tr>";
+	}
+	
+	document.getElementById("resultArea").innerHTML = html+"</tbody></table>";
+}
+function probaNbrReussitesMultiEssais(probaReussite,nbrReussitesVoulu,essais){
+	return coefBinomial(essais,nbrReussitesVoulu)*Math.pow(probaReussite,nbrReussitesVoulu)*Math.pow(1-probaReussite,essais-nbrReussitesVoulu);
+}
+function coefBinomial(n,k){
+	return factorial(n)/(factorial(k)*factorial(n-k))
+}
+var factoMem = [];
+function factorial(n) {
+  if (n == 0 || n == 1)
+    return 1;
+  if (factoMem[n] > 0)
+    return factoMem[n];
+  return factoMem[n] = factorial(n-1) * n;
+}
+simLaunch();
+</script>
+<style>
+table{
+	border-collapse: collapse;
+	overflow: hidden;
+}
+td, th{
+	padding: 5px;
+	position:relative;
+}
+td{
+	text-align:center;
+	border: 1px solid black;
+}
+.right{ text-align:right; }
+span{font-size:9px;}
+thead th:hover::after,
+td:hover::after
+{ 
+  content: '';  
+  height: 10000px;
+  left: 0;
+  position: absolute;  
+  top: -5000px;
+  width: 100%;
+  z-index: -1;
+}
+tbody tr:hover,
+thead th:hover::after,
+td:hover::after
+{
+  background-color: #eef5ff;
+}
+
+</style>
