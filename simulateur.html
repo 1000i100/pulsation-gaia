@@ -1,9 +1,8 @@
 <meta charset="utf-8">
 
-compétence: <input id="comp" onkeyup="simLaunch()" placeholder="nombre d'echecs annulés"/>
-dés: <input id="d" onkeyup="simLaunch()" placeholder="nombre de d2 lancés"/>
-seuils: <input id="seuils" onkeyup="simLaunch()" placeholder="seuils de réussite ( 2, 5 pour indiquer 2 seuils différents)"/>
-<button id="sim" onclick="simLaunch()">Lancer une simulation</button>
+Si je lance <input id="d" onkeyup="simLaunch()" size=1/> d2 en annulant <input id="comp" onkeyup="simLaunch()" size=1 title="effet des compétences"/> échecs<br/>
+quelles sont mes chances d'atteindre les seuils de réussite suivants :
+<input id="seuils" onkeyup="simLaunch()" placeholder="nombres séparés par des virgules" size=30/>
 
 
 <div id="resultArea"></div>
@@ -14,13 +13,13 @@ function simLaunch(){
 	formatResults(res,cfg.seuils);
 }
 function getFormData(){
-	let seuils = document.getElementById("seuils").value.split(",").map((v)=>parseInt(v));
+	let seuils = document.getElementById("seuils").value.split(",").map((v)=>parseInt(v)|0);
 	seuils.push(0);
 	seuils = Array.from(new Set(seuils));
 	seuils.sort( (a,b) => a-b );
 	return {
-		comp: parseInt(document.getElementById("comp").value),
-		d: parseInt(document.getElementById("d").value),
+		comp: parseInt(document.getElementById("comp").value)|0,
+		d: parseInt(document.getElementById("d").value)|0,
 		"seuils": seuils
 	};
 }
@@ -48,7 +47,7 @@ function throwDicesOnce(dicesPerThrow, failsCancelled){
 function formatResults(results, steps){
 	let cols = Object.keys(results).sort( (a,b) => a-b );
 	linearCols = [];
-	for(let i=cols[0];i<=cols[cols.length-1];i++) linearCols.push(i);
+	for(let i=Math.min(steps[0],cols[0]);i<=Math.max(steps[steps.length-1],cols[cols.length-1]);i++) linearCols.push(i);
 	
 	let maxMulti = 5;
 	
@@ -79,9 +78,15 @@ function formatResults(results, steps){
 	let colspan = 0;
 	let iStep = 0;
 	let step = steps[iStep];
+	/*
+	while(step<=linearCols[0]){
+		html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
+		iStep++;
+		step = steps[iStep];
+	}*/
 	for(let i of linearCols){
 		if(i === step){
-			html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
+			if(i !== linearCols[0]) html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
 			colspan=0;
 			accu=0;
 			iStep++;
@@ -105,7 +110,7 @@ function formatResults(results, steps){
 		let colspan = 0;
 		for(let i of linearCols){
 			if(i === step){
-				html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
+				if(i !== linearCols[0]) html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
 				colspan=0;
 				accu=0;
 			}
