@@ -1,5 +1,6 @@
 <meta charset="utf-8">
-
+<h1>Calculateur de probabilitées</h1>
+<br/>
 Si je lance <input id="d" onkeyup="simLaunch()" size=1/> d2 en annulant <input id="comp" onkeyup="simLaunch()" size=1 title="effet des compétences"/> échecs<br/>
 quelles sont mes chances d'atteindre les seuils de réussite suivants :
 <input id="seuils" onkeyup="simLaunch()" placeholder="nombres séparés par des virgules" size=30/>
@@ -64,7 +65,7 @@ function formatResults(results, steps){
 	html += "<tr><th class=right>pourcentages :</th>";
 	for(let i of linearCols){
 		let res = '';
-		if(results[i]) res = Math.round(100*results[i]/total)/1 +"<span>%</span>";
+		if(results[i]) res = formatPercent(results[i]/total);
 		else results[i] = 0;
 		html+="<td>"+res+"</td>";
 	}
@@ -78,15 +79,9 @@ function formatResults(results, steps){
 	let colspan = 0;
 	let iStep = 0;
 	let step = steps[iStep];
-	/*
-	while(step<=linearCols[0]){
-		html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
-		iStep++;
-		step = steps[iStep];
-	}*/
 	for(let i of linearCols){
 		if(i === step){
-			if(i !== linearCols[0]) html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
+			if(i !== linearCols[0]) html+='<td colspan="'+colspan+'">'+ formatPercent(accu/total) +"</td>";
 			colspan=0;
 			accu=0;
 			iStep++;
@@ -95,7 +90,7 @@ function formatResults(results, steps){
 		accu+=results[i];
 		colspan++;
 	}
-	html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
+	html+='<td colspan="'+colspan+'">'+ formatPercent(accu/total) +"</td>";
 	html += "<th>&nbsp;</th>";
 	for(let essais = 2; essais<=maxMulti;essais++){
 		for(let reussites=0;reussites<=essais;reussites++)
@@ -110,14 +105,14 @@ function formatResults(results, steps){
 		let colspan = 0;
 		for(let i of linearCols){
 			if(i === step){
-				if(i !== linearCols[0]) html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
+				if(i !== linearCols[0]) html+='<td colspan="'+colspan+'">'+ formatPercent(accu/total) +"</td>";
 				colspan=0;
 				accu=0;
 			}
 			accu+=results[i];
 			colspan++;
 		}
-		html+='<td colspan="'+colspan+'">'+ Math.round(100*accu/total)/1 +"<span>%</span></td>";
+		html+='<td colspan="'+colspan+'">'+formatPercent(accu/total)+"</td>";
 		html += "<th>&nbsp;</th>";
 		const proba = accu/total;
 		for(let essais = 2; essais<=maxMulti;essais++){
@@ -126,7 +121,7 @@ function formatResults(results, steps){
 				let auMoins = 0;
 				for(let plusDeReussites=reussites;plusDeReussites<=essais;plusDeReussites++)
 					auMoins += probaNbrReussitesMultiEssais(proba,plusDeReussites,essais);
-				html += '<td title="'+Math.round(100*auMoins)/1+'%">'+Math.round(100*res)/1+'<span>%</span></th>'
+				html += '<td title="'+formatPercent(auMoins,true)+'">'+formatPercent(res)+'</th>'
 			}
 			html += "<th>&nbsp;</th>";
 		}
@@ -134,6 +129,12 @@ function formatResults(results, steps){
 	}
 	
 	document.getElementById("resultArea").innerHTML = html+"</tbody></table>";
+}
+function formatPercent(taux,inAttr){
+	const intPart = Math.round(100*taux);
+	if(taux>=0.1) return intPart + (inAttr?'%':'<span class=percent>%</span>');
+	const decimalPart = (( Math.round(1000*taux)/10 )+'').substring(1);
+	return intPart + (inAttr?decimalPart+'%':'<span class=decimal>'+decimalPart+'</span><span class=percent>%</span>');
 }
 function probaNbrReussitesMultiEssais(probaReussite,nbrReussitesVoulu,essais){
 	return coefBinomial(essais,nbrReussitesVoulu)*Math.pow(probaReussite,nbrReussitesVoulu)*Math.pow(1-probaReussite,essais-nbrReussitesVoulu);
@@ -152,6 +153,10 @@ function factorial(n) {
 simLaunch();
 </script>
 <style>
+*{
+font-family: sans-serif;
+}
+h1{text-align:center;}
 table{
 	border-collapse: collapse;
 	overflow: hidden;
@@ -165,7 +170,8 @@ td{
 	border: 1px solid black;
 }
 .right{ text-align:right; }
-span{font-size:9px;}
+.decimal:not(:empty){font-size:11px;letter-spacing: -1px; margin-left: -2px;}
+.percent{font-size:9px;}
 thead th:hover::after,
 td:hover::after
 { 

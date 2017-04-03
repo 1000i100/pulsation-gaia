@@ -9,6 +9,8 @@ Lors d'un jet de dé, vous pouvez utiliser n'importe quoi qui ai 50 % de chance 
 
 Les actions peuvent avoir, a la discression du MJ, une difficulté intrinscèque, une difficulté contextuelle, ou se faire en opposition au résultat d'une autre action.
 
+## [Calculateur de probabilité en ligne](https://gammanu.github.io/pulsation-gaia/calculateur-proba-humanydyne.html)
+
 ## Ordre de grandeur
 
 ### Difficulté à atteindre
