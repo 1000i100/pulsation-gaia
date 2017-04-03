@@ -1,9 +1,8 @@
 <meta charset="utf-8">
 
-comp: <input id="comp" placeholder="comp. (echecs annulés)"/>
-dés: <input id="d" placeholder="nombre de dé lancé"/>
-seuils: <input id="seuils" placeholder="seuils de réussite ( 2, 5 pour indiquer 2 seuils différents)"/>
-lancés: <input id="nbrThrow" placeholder="précision (nombre de lancé pour la simulation)" value="10000"/>
+compétence: <input id="comp" onkeyup="simLaunch()" placeholder="nombre d'echecs annulés"/>
+dés: <input id="d" onkeyup="simLaunch()" placeholder="nombre de d2 lancés"/>
+seuils: <input id="seuils" onkeyup="simLaunch()" placeholder="seuils de réussite ( 2, 5 pour indiquer 2 seuils différents)"/>
 <button id="sim" onclick="simLaunch()">Lancer une simulation</button>
 
 
@@ -11,7 +10,7 @@ lancés: <input id="nbrThrow" placeholder="précision (nombre de lancé pour la 
 <script>
 function simLaunch(){
 	const cfg = getFormData();
-	const res = throwDices(cfg.d, cfg.comp, cfg.nbrThrow);
+	const res = throwDice(cfg.d, cfg.comp);
 	formatResults(res,cfg.seuils);
 }
 function getFormData(){
@@ -22,18 +21,22 @@ function getFormData(){
 	return {
 		comp: parseInt(document.getElementById("comp").value),
 		d: parseInt(document.getElementById("d").value),
-		"seuils": seuils,
-		nbrThrow: parseInt(document.getElementById("nbrThrow").value)
+		"seuils": seuils
 	};
 }
-function throwDices(dicesPerThrow, failsCancelled, throwTimes){
-	let results = {};
-	for(let i=0;i<throwTimes;i++) {
-		const res = throwDicesOnce(dicesPerThrow, failsCancelled);
-		if(!results[res]) results[res] = 0;
-		results[res]++;
+function throwDice(dice, failsCancelled){
+	let rawProbabilities = {};
+	for(let score=0;score<=dice;score++) {
+		rawProbabilities[score] = probaNbrReussitesMultiEssais(1/2,score,dice);
 	}
-	return results;
+	
+	let probabilities = {};
+	for(let rawScore in rawProbabilities) {
+		const score = rawScore - Math.max(0,dice-rawScore-failsCancelled);
+		if(!probabilities[score]) probabilities[score] = 0;
+		probabilities[score] += rawProbabilities[rawScore];
+	}
+	return probabilities;
 }
 function throwDicesOnce(dicesPerThrow, failsCancelled){
 	let fails = 0;
@@ -45,28 +48,25 @@ function throwDicesOnce(dicesPerThrow, failsCancelled){
 function formatResults(results, steps){
 	let cols = Object.keys(results).sort( (a,b) => a-b );
 	linearCols = [];
-	for(let i=cols[0];i<cols[cols.length-1];i++) linearCols.push(i);
+	for(let i=cols[0];i<=cols[cols.length-1];i++) linearCols.push(i);
 	
 	let maxMulti = 5;
 	
-	let html = "<table><thead><tr><th></th><th>" + linearCols.join("</th><th>") +"</th></tr></thead><tbody>";
-	const total = Object.values(results).reduce((accu, v) => accu+v, 0);
-
-	html += "<tr><th class=right>résultats bruts :</th>";
-	for(let i of linearCols){
-		html+="<td>"+(results[i]?results[i]:results[i]=0)+"</td>";
-	}
+	let html = "<table><thead><tr><th></th><th>" + linearCols.join("</th><th>") +"</th>"
 	multiColTotalSpan = 0;
 	for(let essais = 2; essais<=maxMulti;essais++){
 		for(let reussites=0;reussites<=essais;reussites++) multiColTotalSpan++;
 		multiColTotalSpan++
 	}
-	html += '<th>&nbsp;</th><th colspan="'+multiColTotalSpan+'">réussites sur plusieurs lancés</th></tr>';
+	html += '<th>&nbsp;</th><th colspan="'+multiColTotalSpan+'">réussites sur plusieurs lancés</th>';
+	html += "</tr></thead><tbody>";
+	const total = Object.values(results).reduce((accu, v) => accu+v, 0);
 
 	html += "<tr><th class=right>pourcentages :</th>";
 	for(let i of linearCols){
 		let res = '';
 		if(results[i]) res = Math.round(100*results[i]/total)/1 +"<span>%</span>";
+		else results[i] = 0;
 		html+="<td>"+res+"</td>";
 	}
 	html += "<th>&nbsp;</th>";
